@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Кошик | PC</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #2c2c2c; color: white; padding: 40px; }
+        .cart-container { max-width: 800px; margin: 0 auto; background: #3d3d3d; padding: 20px; border-radius: 15px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #555; }
+        .total { font-size: 1.5rem; text-align: right; color: #00d4ff; }
+        .btn { padding: 10px 20px; text-decoration: none; border-radius: 5px; color: white; display: inline-block; }
+        .btn-clear { background: #dc3545; }
+        .btn-back { background: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <h2>Твій кошик у PC</h2>
+        <table>
+            <tr>
+                <th>Товар</th>
+                <th>Кількість</th>
+                <th>Сума</th>
+            </tr>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }} шт.</td>
+                <td>{{ item.item_total }} грн</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">Кошик порожній :(</td></tr>
+            {% endfor %}
+        </table>
+        <div class="total">Разом: {{ total_price }} грн</div>
+        <hr>
+        <a href="/" class="btn btn-back">Повернутися до магазину</a>
+        <a href="{% url 'clear_cart' %}" class="btn btn-clear">Очистити кошик</a>
+    </div>
+</body>
+</html>
